@@ -43,7 +43,7 @@ pipeline{
                 nexusUrl: '172.20.10.70:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: "${Project1DevOpsLab-SNAPSHOT}", 
+                repository: 'Project1DevOpsLab-SNAPSHOT', 
                 version: "${Version}"
               
             }
