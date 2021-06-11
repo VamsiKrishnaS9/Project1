@@ -34,12 +34,12 @@ pipeline{
             steps {
                 script {
 
-                def NExusRepo = Version.endswith("SNAPSHOT") ? "Project1DevOpsLab-SNAPSHOT" : "Project1DevOpsLab-RELEASE"
+                def NexusRepo = Version.endsWith("SNAPSHOT") ? "Project1DevOpsLab-SNAPSHOT" : "Project1DevOpsLab-RELEASE"
 
                 nexusArtifactUploader artifacts: 
                 [[artifactId: "${ArtifactId}", 
                 classifier: '', 
-                file: "target/VinayDevOpsLab-0.0.4-SNAPSHOT.war", 
+                file: "target/${ArtifactId}-${Version}.war", 
                 type: 'war']], 
                 credentialsId: '7055983e-1c49-4dcc-ac11-1bae5bf11968', 
                 groupId: "${GroupId}", 
