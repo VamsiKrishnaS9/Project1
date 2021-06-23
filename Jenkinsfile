@@ -52,14 +52,26 @@ pipeline{
             }
         }
 
-        // Stage4 : Deploying 
-        stage ('Deploy'){
+        // Stage5 : Deploying the build artifact to apache tomcat
+        stage ('Deploy to Tomcat'){
             steps {
                 echo 'deploying......'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: [
+                        sshTransfer(
+                            cleanRemote: false,  
+                            execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy.yaml -i /opt/playbooks/hosts', 
+                            execTimeout: 120000,  
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                    ])
             }
         }
 
-        // Stage 5 : Print some information
+        // Stage4 : Print some information
         stage ('Print Environment variables'){
                     steps {
                         echo "Artifact ID is '${ArtifactId}'"
