@@ -52,6 +52,17 @@ pipeline{
             }
         }
 
+
+        // Stage4 : Print some information
+        stage ('Print Environment variables'){
+                    steps {
+                        echo "Artifact ID is '${ArtifactId}'"
+                        echo "Version is '${Version}'"
+                        echo "GroupID is '${GroupId}'"
+                        echo "Name is '${Name}'"
+                    }
+                }
+
         // Stage5 : Deploying the build artifact to apache tomcat
         stage ('Deploy to Tomcat'){
             steps {
@@ -92,18 +103,9 @@ pipeline{
                     verbose: false)
                     ])
             }    
-    }
+        }
 
 
-        // Stage4 : Print some information
-        stage ('Print Environment variables'){
-                    steps {
-                        echo "Artifact ID is '${ArtifactId}'"
-                        echo "Version is '${Version}'"
-                        echo "GroupID is '${GroupId}'"
-                        echo "Name is '${Name}'"
-                    }
-                }
         
     }
 
